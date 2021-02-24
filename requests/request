@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+
+# Functions
+
+get() {
+  curl -X GET \
+    "$URL"
+}
+
+post() {
+  curl -X POST \
+    "$URL" \
+    --header 'Content-Type: application/json' \
+    -d '
+      {
+        "title": "Nouveau titre",
+        "author": "JB La Peluche",
+        "url": "http://truc",
+        "likes": 1234
+      }'
+}
+
+delete() {
+  curl -X DELETE \
+    "$URL"
+}
+
+put() {
+  curl -X PUT \
+    "$URL" \
+    --header 'Content-Type: application/json' \
+    -d '
+      {
+      }'
+}
+
+# Variables
+
+URL="http://localhost:3001/api/blogs"
+
+# Samples
+
+#get | jq
+post| jq
+#delete | jq
+#put | jq
