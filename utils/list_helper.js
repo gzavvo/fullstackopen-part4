@@ -37,9 +37,25 @@ const mostBlogs = blogs => {
     .find((author, index, authors) => author.blogs === Math.max(...authors.map(author => author.blogs)))
 }
 
+const mostLikes = blogs => {
+  return blogs
+    .map(blog => blog.author)
+    .filter((author, index, self) => self.indexOf(author) === index)
+    .map(author => {
+      return {
+        author: author,
+        likes: blogs
+          .filter(blog => blog.author === author)
+          .reduce((sum, blog) => sum + blog.likes, 0)
+      }
+    })
+    .find((author, index, authors) => author.likes === Math.max(...authors.map(author => author.likes)))
+}
+
 module.exports = {
   dummy,
   totalLikes,
   favoriteBlog,
-  mostBlogs
+  mostBlogs,
+  mostLikes
 }
