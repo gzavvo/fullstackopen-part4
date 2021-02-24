@@ -1,8 +1,8 @@
-const dummy = (blogs) => {
+const dummy = blogs => {
   return 1
 }
 
-const totalLikes = (blogs) => {
+const totalLikes = blogs => {
   return blogs.reduce((sum, blog) => sum + blog.likes, 0)
 }
 
@@ -14,7 +14,7 @@ const minimized = (blog) => {
   }
 }
 
-const favoriteBlog = (blogs) => {
+const favoriteBlog = blogs => {
   if (blogs.length === 0) {
     return undefined
   }
@@ -24,8 +24,22 @@ const favoriteBlog = (blogs) => {
   return minimized(mostLikedBlog)
 }
 
+const mostBlogs = blogs => {
+  return blogs
+    .map(blog => blog.author)
+    .filter((author, index, self) => self.indexOf(author) === index)
+    .map(author => {
+      return {
+        author: author,
+        blogs: blogs.filter(blog => blog.author === author).length
+      }
+    })
+    .find((author, index, authors) => author.blogs === Math.max(...authors.map(author => author.blogs)))
+}
+
 module.exports = {
   dummy,
   totalLikes,
-  favoriteBlog
+  favoriteBlog,
+  mostBlogs
 }
