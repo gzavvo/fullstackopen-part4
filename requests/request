@@ -13,10 +13,10 @@ post() {
     --header 'Content-Type: application/json' \
     -d '
       {
-        "title": "Nouveau titre",
-        "author": "JB La Peluche",
+        "title": "Un autre pour le fun",
+        "author": "Marc Le Truc",
         "url": "http://truc",
-        "likes": 1234
+        "likes": 134
       }'
 }
 
