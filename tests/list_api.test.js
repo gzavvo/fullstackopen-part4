@@ -68,15 +68,28 @@ test('like property assign to 0 when missing', async () => {
   expect(response.body.likes).toBe(0)
 })
 
-test.only('if title and url property are missing, response has a status code 400', async () => {
+test('if title and url property are missing, response has a status code 400', async () => {
   const newBlog = {
     likes: 8
   }
 
-  const response = await api
+  await api
     .post('/api/blogs')
     .send(newBlog)
     .expect(400)
+})
+
+test.only('deletion of a note', async () => {
+  const blogsAtStart = await helpers.blogsInDb()
+  const blogToDelete = blogsAtStart[0]
+
+  await api
+    .delete(`/api/blogs/${blogToDelete.id}`)
+    .expect(204)
+
+  const blogsAtEnd = await helpers.blogsInDb()
+
+  expect(blogsAtEnd.length).toBe(helpers.initialBlogs.length -1)
 })
 
 afterAll(() => {
