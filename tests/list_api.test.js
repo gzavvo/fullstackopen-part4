@@ -51,6 +51,34 @@ test('a valid blog can be added', async () => {
   )
 })
 
+test('like property assign to 0 when missing', async () => {
+  const newBlog = {
+    title: 'Art and fear: the ceramics class and quantity before quality',
+    author: 'Eric Johnson',
+    url: 'https://excellentjourney.net/2015/03/04/art-fear-the-ceramics-class-and-quantity-before-quality/',
+  }
+
+  const response = await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
+
+
+  expect(response.body.likes).toBe(0)
+})
+
+test.only('if title and url property are missing, response has a status code 400', async () => {
+  const newBlog = {
+    likes: 8
+  }
+
+  const response = await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(400)
+})
+
 afterAll(() => {
   mongoose.connection.close()
 })
