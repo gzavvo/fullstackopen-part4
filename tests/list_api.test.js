@@ -28,6 +28,29 @@ test('blogs have a unique identifier property named _id_', async () => {
   })
 })
 
+test('a valid blog can be added', async () => {
+  const newBlog = {
+    title: 'Art and fear: the ceramics class and quantity before quality',
+    author: 'Eric Johnson',
+    url: 'https://excellentjourney.net/2015/03/04/art-fear-the-ceramics-class-and-quantity-before-quality/',
+    likes: 6
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
+
+  const blogsAtEnd = await helpers.blogsInDb()
+  expect(blogsAtEnd.length).toBe(helpers.initialBlogs.length + 1)
+
+  const titles = blogsAtEnd.map(blog => blog.title)
+  expect(titles).toContain(
+    'Art and fear: the ceramics class and quantity before quality'
+  )
+})
+
 afterAll(() => {
   mongoose.connection.close()
 })
