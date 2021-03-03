@@ -79,7 +79,7 @@ test('if title and url property are missing, response has a status code 400', as
     .expect(400)
 })
 
-test.only('deletion of a note', async () => {
+test.only('deletion of a blog', async () => {
   const blogsAtStart = await helpers.blogsInDb()
   const blogToDelete = blogsAtStart[0]
 
@@ -90,6 +90,21 @@ test.only('deletion of a note', async () => {
   const blogsAtEnd = await helpers.blogsInDb()
 
   expect(blogsAtEnd.length).toBe(helpers.initialBlogs.length -1)
+})
+
+test.only('update of a blog', async () => {
+  const blogsAtStart = await helpers.blogsInDb()
+  const blogToUpdate = blogsAtStart[0]
+
+  const updatedBlog = {
+    ...blogToUpdate,
+    likes: 666
+  }
+
+  await api
+    .put(`/api/blogs/${blogToUpdate.id}`)
+    .send(updatedBlog)
+    .expect(200)
 })
 
 afterAll(() => {
