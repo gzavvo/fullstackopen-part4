@@ -13,10 +13,9 @@ post() {
     --header 'Content-Type: application/json' \
     -d '
       {
-        "title": "Un autre pour le fun",
-        "author": "Marc Le Truc",
-        "url": "http://truc",
-        "likes": 134
+        "username": "gzavvo",
+        "name": "Xav Bar",
+        "password": "lijfes"
       }'
 }
 
@@ -36,7 +35,7 @@ put() {
 
 # Variables
 
-URL="http://localhost:3001/api/blogs"
+URL="http://localhost:3001/api/users"
 
 # Samples
 
