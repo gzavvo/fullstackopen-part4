@@ -9,6 +9,20 @@ const requestLogger = (request, response, next) => {
   next()
 }
 
+const unknownEndpoint = (request, response) => {
+  response.status(404).send({ error: 'unknown endopint' })
+}
+
+const errorHandler = (error, request, response, next) => {
+  logger.error(error.message)
+
+  if (error.name === 'ValidationError') {
+    return response.status(400).send(error.message)
+  }
+}
+
 module.exports = {
-  requestLogger
+  requestLogger,
+  unknownEndpoint,
+  errorHandler,
 }
