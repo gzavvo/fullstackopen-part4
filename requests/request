@@ -7,15 +7,28 @@ get() {
     "$URL"
 }
 
-post() {
+postBlog() {
   curl -X POST \
-    "$URL" \
+    "$blogUrl" \
     --header 'Content-Type: application/json' \
     -d '
       {
+        "title": "25 trucs",
+        "author": "Tomas Laurinavicius",
+        "url": "https://www.huffpost.com/entry/25-practical-blogs-to-sharpen-your-coding-skills_b_584b8011e4b01713310510cd?guccounter=1",
+        "likes": 100
+      }'
+}
+
+postUser() {
+  curl -X POST \
+    "$userUrl" \
+    --header 'Content-Type: application/json' \
+    -d '
+      {
+        "name": "Xav",
         "username": "gzavvo",
-        "name": "Xav Bar",
-        "password": "lijfes"
+        "password": "truc"
       }'
 }
 
@@ -35,11 +48,14 @@ put() {
 
 # Variables
 
-URL="http://localhost:3001/api/users"
+blogUrl="http://localhost:3001/api/blogs"
+userUrl="http://localhost:3001/api/users"
+
 
 # Samples
 
 #get | jq
-post| jq
+#postUser | jq
+postBlog | jq
 #delete | jq
 #put | jq
