@@ -83,8 +83,8 @@ loginUrl="http://localhost:3001/api/login"
 
 #get | jq
 #postUser | jq
-#postBlog | jq
+postBlog | jq
 #loginUser | jq
-delete | jq
+#delete | jq
 #put | jq
 
