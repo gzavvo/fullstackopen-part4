@@ -59,7 +59,8 @@ postBlog() {
 
 delete() {
   curl -X DELETE \
-    "$URL"
+    "$blogUrl/605884d411eb61318634793f" \
+    --header 'Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imd6YXZ2byIsImlkIjoiNjA1NzgwZGI0MDdkYmMyNjU1MDAxMWI4IiwiaWF0IjoxNjE2NDEzMTYwfQ.M0IEWr37cKHPO7HsaOONYtaMgPMaRS3CQC-emarOpo0'
 }
 
 put() {
@@ -82,8 +83,8 @@ loginUrl="http://localhost:3001/api/login"
 
 #get | jq
 #postUser | jq
-postBlog | jq
+#postBlog | jq
 #loginUser | jq
-#delete | jq
+delete | jq
 #put | jq
 
