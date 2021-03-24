@@ -13,6 +13,10 @@ beforeEach(async () => {
   await Promise.all(promiseArray)
 })
 
+const auth = {
+  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imd6YXZ2byIsImlkIjoiNjA1NzgwZGI0MDdkYmMyNjU1MDAxMWI4IiwiaWF0IjoxNjE2NDEzMTYwfQ.M0IEWr37cKHPO7HsaOONYtaMgPMaRS3CQC-emarOpo0'
+}
+
 test('blogs are returned as json', async () => {
   await api
     .get('/api/blogs')
@@ -38,6 +42,7 @@ test('a valid blog can be added', async () => {
 
   await api
     .post('/api/blogs')
+    .set('Authorization', 'bearer ' + auth.token)
     .send(newBlog)
     .expect(201)
     .expect('Content-Type', /application\/json/)
@@ -60,6 +65,7 @@ test('like property assign to 0 when missing', async () => {
 
   const response = await api
     .post('/api/blogs')
+    .set('Authorization', 'bearer ' + auth.token)
     .send(newBlog)
     .expect(201)
     .expect('Content-Type', /application\/json/)
@@ -75,16 +81,19 @@ test('if title and url property are missing, response has a status code 400', as
 
   await api
     .post('/api/blogs')
+    .set('Authorization', 'bearer ' + auth.token)
     .send(newBlog)
     .expect(400)
 })
 
-test.only('deletion of a blog', async () => {
+test('deletion of a blog', async () => {
   const blogsAtStart = await helpers.blogsInDb()
   const blogToDelete = blogsAtStart[0]
+  console.log('-- blogToDelete.id: ', blogToDelete.id)
 
   await api
     .delete(`/api/blogs/${blogToDelete.id}`)
+    .set('Authorization', 'bearer ' + auth.token)
     .expect(204)
 
   const blogsAtEnd = await helpers.blogsInDb()
@@ -92,7 +101,7 @@ test.only('deletion of a blog', async () => {
   expect(blogsAtEnd.length).toBe(helpers.initialBlogs.length -1)
 })
 
-test.only('update of a blog', async () => {
+test('update of a blog', async () => {
   const blogsAtStart = await helpers.blogsInDb()
   const blogToUpdate = blogsAtStart[0]
 

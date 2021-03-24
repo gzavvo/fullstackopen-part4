@@ -50,7 +50,7 @@ postBlog() {
     --header 'Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imd6YXZ2byIsImlkIjoiNjA1NzgwZGI0MDdkYmMyNjU1MDAxMWI4IiwiaWF0IjoxNjE2NDEzMTYwfQ.M0IEWr37cKHPO7HsaOONYtaMgPMaRS3CQC-emarOpo0' \
     -d '
       {
-        "title": "Art & Fear: The ceramics class and quantity before quality",
+        "title": "Ceramics",
         "author": "Eric Johnson",
         "url": "https://excellentjourney.net/2015/03/04/art-fear-the-ceramics-class-and-quantity-before-quality/",
         "likes": 6
@@ -59,13 +59,13 @@ postBlog() {
 
 delete() {
   curl -X DELETE \
-    "$blogUrl/605884d411eb61318634793f" \
+    "$blogUrl/5a422a851b54a676234d17f7" \
     --header 'Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imd6YXZ2byIsImlkIjoiNjA1NzgwZGI0MDdkYmMyNjU1MDAxMWI4IiwiaWF0IjoxNjE2NDEzMTYwfQ.M0IEWr37cKHPO7HsaOONYtaMgPMaRS3CQC-emarOpo0'
 }
 
 put() {
   curl -X PUT \
-    "$URL" \
+    "$blogUrl" \
     --header 'Content-Type: application/json' \
     -d '
       {
@@ -78,13 +78,12 @@ blogUrl="http://localhost:3001/api/blogs"
 userUrl="http://localhost:3001/api/users"
 loginUrl="http://localhost:3001/api/login"
 
-
 # Samples
 
 #get | jq
 #postUser | jq
-postBlog | jq
+#postBlog | jq
 #loginUser | jq
-#delete | jq
+delete | jq
 #put | jq
 
