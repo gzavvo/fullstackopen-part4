@@ -26,8 +26,8 @@ postUser() {
     --header 'Content-Type: application/json' \
     -d '
       {
-        "name": "Jean",
-        "username": "jean",
+        "name": "Xav",
+        "username": "gzavvo",
         "password": "truc"
       }'
 }
@@ -81,9 +81,9 @@ loginUrl="http://localhost:3001/api/login"
 # Samples
 
 #get | jq
-#postUser | jq
+postUser | jq
 #postBlog | jq
 #loginUser | jq
-delete | jq
+#delete | jq
 #put | jq
 
